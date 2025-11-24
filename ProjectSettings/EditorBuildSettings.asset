@@ -8,4 +8,25 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level/Base/BaseLevel.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 3847a60acdb52c442a622a61296cfaac
+  - enabled: 1
+    path: Assets/Scenes/Level Tilemap/Level 1.unity
+    guid: b5fe4128c44a66044ad7e9912ced57ac
+  - enabled: 1
+    path: Assets/Scenes/Level Tilemap/Level 2.unity
+    guid: ef704bb6cae9e054dbb2cd52fe41e87e
+  - enabled: 1
+    path: Assets/Scenes/Level Tilemap/Level 3.unity
+    guid: 524e86c13ca62ba43a9e8b3a333ae5c6
+  - enabled: 1
+    path: Assets/Scenes/Level Tilemap/Level 4.unity
+    guid: f2f840491949b9d4b8bc5f2445dc619b
+  - enabled: 1
+    path: Assets/Scenes/Levels Menu.unity
+    guid: 80430cee7c3c7e54f8385e8b2878e52c
+  - enabled: 1
+    path: Assets/Scenes/Level Tilemap/Level 5.unity
+    guid: 6bbe799cdb8ce2b42a65892e237f5f9c
   m_configObjects: {}
