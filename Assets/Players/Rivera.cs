@@ -1,11 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class Rivera : MonoBehaviour
 {
     [SerializeField] LevelHandler levelHandler;
-    [SerializeField] int Player = 1;
 
     [SerializeField] float SPEED = 3f;
     [SerializeField] float JUMPSTRENGTH = 6f;
@@ -13,6 +13,9 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb;
 
     Vector2 velocity = Vector2.zero;
+    [SerializeField] Transform groundCheckPos;
+    [SerializeField] LayerMask groundLayerMask;
+    [NonSerialized] public bool onGround = false;
 
     private void Start()
     {
@@ -26,21 +29,32 @@ public class PlayerMovement : MonoBehaviour
 
     void movement()
     {
+        onGround = Physics2D.OverlapBox(groundCheckPos.position, new Vector2(1, .05f), groundLayerMask) != null; // edit this shit
+
         if (levelHandler != null && !levelHandler.levelEnd)
         {
-            float inputHorizontal = Input.GetAxis("Horizontal" + Player.ToString());
+            float inputHorizontal = Input.GetAxis("Horizontal1");
 
             velocity.x = inputHorizontal * SPEED;
-            if (Input.GetButtonDown("Vertical" + Player.ToString()))
+
+
+
+            if(onGround && Input.GetButton("Vertical1")) // jump button
             {
                 velocity.y = JUMPSTRENGTH;
+            }
+            else if (!onGround && rb.velocity.y < 0 && Input.GetButton("Vertical1")) // Glide
+            {
+                velocity.y = -.5f;
             }
             else
             {
                 velocity.y = rb.velocity.y;
             }
+            
             rb.velocity = velocity;
         }
+        print(onGround);
     }
 
 
