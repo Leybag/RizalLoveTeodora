@@ -6,7 +6,10 @@ public static class GameManager
 {
     static Dictionary<int,int> levelProgress = new Dictionary<int, int>()
     {
+
         {1,0},
+//       ^level number
+//         ^Heart Count
         {2,0},
         {3,0},
         {4,0},
@@ -28,12 +31,17 @@ public static class GameManager
         {
             levelProgress[level] = collectedHearts;
             levelProgress[level] = Mathf.Clamp(levelProgress[level], 0, 3);
-            Debug.Log("Total Collected Hearts in " + level + ": " + levelProgress[level]);
+            Debug.Log("Total Collected Hearts in level " + level + ": " + levelProgress[level] + " out of 3");
         }
     }
 
     public static void UnlockLevel(int level)
     {
         levelUnlock[level - 1] = true;
+    }
+
+    public static bool CheckLevelUnlock(int level)
+    {
+        return levelUnlock[level - 1];
     }
 }

@@ -63,4 +63,14 @@ public class LevelHandler : MonoBehaviour
             FailedPanel.SetActive(true);
         }
     }
+
+    public void RetryLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void NextLevel()
+    {
+        SceneManager.LoadScene("Level " + (level +1));
+    }
 }
