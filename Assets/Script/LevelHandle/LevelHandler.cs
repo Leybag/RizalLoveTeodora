@@ -17,6 +17,7 @@ public class LevelHandler : MonoBehaviour
     //temporary
     [SerializeField] GameObject VictoryPanel;
     [SerializeField] GameObject FailedPanel;
+    [SerializeField] GameObject MenuPanel;
 
     int heartCollected = 0;
     public bool levelEnd = false;
@@ -67,10 +68,25 @@ public class LevelHandler : MonoBehaviour
     public void RetryLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1f;
     }
 
     public void NextLevel()
     {
         SceneManager.LoadScene("Level " + (level +1));
     }
+
+    public void Menubtn()
+    {
+        MenuPanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    public void Resumebtn()
+    {
+        MenuPanel.SetActive(false);
+        Time.timeScale = 1f;
+    }
+    
+    
 }
