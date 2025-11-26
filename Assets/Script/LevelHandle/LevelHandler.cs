@@ -22,6 +22,13 @@ public class LevelHandler : MonoBehaviour
     int heartCollected = 0;
     public bool levelEnd = false;
 
+    private void Update()
+    {
+        if (Input.GetButtonDown("Cancel"))
+        {
+            Menubtn();
+        }
+    }
     public void addHeart()
     {
         heartCollected++;
@@ -46,6 +53,7 @@ public class LevelHandler : MonoBehaviour
             levelEnd = true;
             GameManager.setLevelCollectedHearts(level, heartCollected);
             GameManager.UnlockLevel(level+1);
+            Time.timeScale = 0f;
 
             //Change this later
             VictoryPanel.SetActive(true);
@@ -59,6 +67,7 @@ public class LevelHandler : MonoBehaviour
         {
             levelEnd = true;
             GameManager.setLevelCollectedHearts(level, heartCollected);
+            Time.timeScale = 0f;
 
             //Change this later
             FailedPanel.SetActive(true);
@@ -70,10 +79,16 @@ public class LevelHandler : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1f;
     }
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("Main Menu");
+        Time.timeScale = 1f;
+    }
 
     public void NextLevel()
     {
         SceneManager.LoadScene("Level " + (level +1));
+        Time.timeScale = 1f;
     }
 
     public void Menubtn()

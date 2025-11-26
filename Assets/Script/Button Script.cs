@@ -50,5 +50,9 @@ public class ButtonScript : MonoBehaviour
         SceneManager.LoadScene("Level 5");
     }
 
+    public void GotoLevel(string name)
+    {
+        SceneManager.LoadScene(name);
+    }
 
 }
