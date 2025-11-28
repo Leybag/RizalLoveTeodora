@@ -15,15 +15,18 @@ public class Rivera : MonoBehaviour
 
     Rigidbody2D rb;
 
-    Vector2 velocity = Vector2.zero;
+    public Vector2 velocity = Vector2.zero;
     [SerializeField] Transform groundCheckPos;
     [SerializeField] LayerMask groundLayerMask;
+    [SerializeField] SpriteRenderer sprite;
+    Animator anim;
     bool onGround = false;
+    [NonSerialized] public bool isThereCeiling = false;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
+        anim = GetComponent<Animator>();
         GameObject[] rootObj = SceneManager.GetActiveScene().GetRootGameObjects();
         foreach (GameObject obj in rootObj)
         {
@@ -48,24 +51,26 @@ public class Rivera : MonoBehaviour
 
             onGround = Physics2D.OverlapBox(groundCheckPos.position, new Vector2(.25f, .01f), 0, groundLayerMask) != null;
 
-            float inputHorizontal = Input.GetAxis("Horizontal1");
+            float inputHorizontal = Input.GetAxisRaw("Horizontal1");
+            float inputVertical = Input.GetAxisRaw("Vertical1");
+
             velocity.x = inputHorizontal * SPEED;
 
 
 
-            if(onGround && Input.GetAxisRaw("Vertical1") > 0) // Jump button
+            if (onGround && inputVertical > 0) // Jump button
             {
                 velocity.y = JUMPSTRENGTH;
             }
-            else if (!onGround && velocity.y < -.2f && Input.GetAxisRaw("Vertical1") > 0) // Glide
+            else if (!onGround && velocity.y < -.3f && inputVertical > 0 && !isThereCeiling) // Glide
             {
-                velocity.y = -0.2f;
+                velocity.y = -0.3f;
             }
             else
             {
                 velocity.y = rb.velocity.y;
             }
-            
+            animationHaldler(inputHorizontal, inputVertical);
             rb.velocity = velocity;
         }
         else
@@ -103,4 +108,50 @@ public class Rivera : MonoBehaviour
         // Draw the box
         Gizmos.DrawWireCube(Vector3.zero, new Vector2(.25f, .01f));
     }
+
+    void animationHaldler(float HorizontalInput , float VerticalInput)
+    {
+        if (HorizontalInput > 0)
+        {
+            sprite.flipX = false;
+        }
+        else if (HorizontalInput < 0)
+        {
+            sprite.flipX = true;
+        }
+
+        if (!isThereCeiling)
+        {
+            if (HorizontalInput == 0 && onGround)
+            {
+                anim.Play("Idle");
+            }
+            else if (HorizontalInput != 0 && onGround)
+            {
+                anim.Play("Walk");
+            }
+            else if (!onGround && VerticalInput > 0 && rb.velocity.y < 0.29f)
+            {
+                anim.Play("Glide");
+            }
+            else if (!onGround && rb.velocity.y > 0.29f)
+            {
+                anim.Play("Jump");
+            }
+        }
+        else
+        {
+            if (HorizontalInput == 0)
+            {
+                anim.Play("Crouch_Idle");
+            }
+            else if (HorizontalInput != 0)
+            {
+                anim.Play("Crouch");
+            }
+        }
+
+        
+    }
+
 }

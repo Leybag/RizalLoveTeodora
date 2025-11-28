@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class Rizal : MonoBehaviour
 {
@@ -14,17 +15,19 @@ public class Rizal : MonoBehaviour
 
     Rigidbody2D rb;
 
-    Vector2 velocity = Vector2.zero;
+    public Vector2 velocity = Vector2.zero;
     [SerializeField] LayerMask groundLayerMask;
     bool onGround = false;
     [SerializeField] LayerMask ladderLayerMask;
     bool onLadder = false;
     Collider2D ladderCol;
+    Animator anim;
+    [SerializeField] SpriteRenderer sprite;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
+        anim = GetComponent<Animator>();
         GameObject[] rootObj = SceneManager.GetActiveScene().GetRootGameObjects();
         foreach (GameObject obj in rootObj)
         {
@@ -51,16 +54,19 @@ public class Rizal : MonoBehaviour
             onLadder = (ladderCol = Physics2D.OverlapBox(transform.position + (Vector3.up * .5f), new Vector2(.25f, .01f), 0, ladderLayerMask)) != null;
 
         
-            float inputHorizontal = Input.GetAxis("Horizontal");
-            float inputVertical = Input.GetAxis("Vertical");
+            float inputHorizontal = Input.GetAxisRaw("Horizontal");
+            float inputVertical = Input.GetAxisRaw("Vertical");
+
             velocity.x = inputHorizontal * SPEED;
 
             if (onGround && inputVertical > 0) // Jump button
             {
                 velocity.y = JUMPSTRENGTH;
+                //jump
             }
             else if (!onGround && onLadder) // Climb buttons
             {
+                //climb
                 velocity = Vector2.zero;
                 float newXpos = transform.position.x;
 
@@ -78,6 +84,16 @@ public class Rizal : MonoBehaviour
             {
                 velocity.y = rb.velocity.y;
             }
+            if (onLadder)
+            {
+                rb.gravityScale = 0;
+            }
+            else
+            {
+                rb.gravityScale = 2;
+            }
+            
+            animationHandler(inputHorizontal);
 
             rb.velocity = velocity;
         }
@@ -108,6 +124,17 @@ public class Rizal : MonoBehaviour
                 levelHandler.levelFailed();
             }
         }
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            transform.parent = null;
+        }
     }
     void OnDrawGizmos()
     {
@@ -125,4 +152,39 @@ public class Rizal : MonoBehaviour
         Gizmos.DrawWireCube(Vector3.zero, new Vector2(.25f, .01f));
         Gizmos.DrawWireCube(Vector3.up * .5f, new Vector2(.25f, .01f));
     }
+
+    void animationHandler(float horizontalInput)
+    {
+        if (horizontalInput > 0)
+        {
+            sprite.flipX = false;
+        }
+        else if (horizontalInput < 0)
+        {
+            sprite.flipX = true;
+        }
+
+
+        if (horizontalInput == 0 && onGround && !onLadder)
+        {
+            anim.Play("Idle");
+        }
+        else if(horizontalInput != 0 && onGround && !onLadder)
+        {
+            anim.Play("Walk");
+        }
+        else if (!onLadder && !onGround)
+        {
+            anim.Play("Jump");
+        }
+        else if (onLadder && !onGround && horizontalInput == 0)
+        {
+            anim.Play("Climb_Idle");
+        }
+        else if (onLadder && !onGround && horizontalInput != 0)
+        {
+            anim.Play("Climb");
+        }
+    }
+
 }

@@ -57,8 +57,8 @@ Transform:
   m_GameObject: {fileID: 290930078358824375}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.013, y: 0.476, z: 0}
-  m_LocalScale: {x: 0.3151157, y: 0.3151157, z: 0.3151157}
+  m_LocalPosition: {x: 0, y: 0.485, z: 0}
+  m_LocalScale: {x: 0.055383123, y: 0.055383123, z: 0.055383123}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2497353266209908696}
@@ -104,7 +104,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6f315fa98da008a429f6fba669d0228c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b5afd4d92b6b38645bdeaf86f5213482, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -127,7 +127,8 @@ GameObject:
   - component: {fileID: 1191717529959666860}
   - component: {fileID: 4236407672689714564}
   - component: {fileID: 6592151611379822895}
-  m_Layer: 0
+  - component: {fileID: 7748537761259352367}
+  m_Layer: 7
   m_Name: Rizal
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -164,14 +165,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SPEED: 3
-  CLIMBSPEED: 3
-  JUMPSTRENGTH: 9
+  CLIMBSPEED: 2
+  JUMPSTRENGTH: 6
+  velocity: {x: 0, y: 0}
   groundLayerMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 264
   ladderLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  sprite: {fileID: 1936576090408507678}
 --- !u!70 &4236407672689714564
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -234,3 +237,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!95 &7748537761259352367
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6211310627307547694}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cb1b6fc6b4a10d34f8a9d85373fc73eb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

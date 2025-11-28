@@ -66,6 +66,7 @@ public class PatrolEnemy : MonoBehaviour
     {
         isThereGround = Physics2D.Raycast(checkGroundPosition.position, Vector2.down, .2f, ObstacleMask);
         isThereWall = Physics2D.Raycast(checkWallPosition.position, Vector2.right * direction, .40f, ObstacleMask);
+
         if (!isThereWall)
         {
             isThereWall = Physics2D.Raycast(checkWallPosition2.position, Vector2.right * direction, .40f, ObstacleMask);

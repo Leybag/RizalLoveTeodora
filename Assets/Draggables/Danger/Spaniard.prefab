@@ -396,7 +396,7 @@ GameObject:
   - component: {fileID: 3139409917301323437}
   - component: {fileID: 2362086403177379133}
   - component: {fileID: 4503043562933894975}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Spaniard
   m_TagString: Spaniard
   m_Icon: {fileID: 0}
@@ -465,7 +465,7 @@ MonoBehaviour:
   checkWallPosition2: {fileID: 1908128684842266392}
   ObstacleMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 1073742088
   bulletSpawnPosition: {fileID: 1573296175663928090}
   BulletPrefab: {fileID: 0}
   bulletShootInterval: 1
