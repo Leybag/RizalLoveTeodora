@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class Rivera : MonoBehaviour
 {
-    LevelHandler levelHandler;
+    [NonSerialized] public LevelHandler levelHandler;
 
     [SerializeField] float SPEED = 3f;
     [SerializeField] float JUMPSTRENGTH = 6f;
@@ -45,52 +45,46 @@ public class Rivera : MonoBehaviour
 
     void movement()
     {
-        if (levelHandler != null && !levelHandler.levelEnd)
+        velocity = rb.velocity; // don't remove
+
+        onGround = Physics2D.OverlapBox(groundCheckPos.position, new Vector2(.25f, .01f), 0, groundLayerMask) != null;
+
+        float inputHorizontal = Input.GetAxisRaw("Horizontal1");
+        float inputVertical = Input.GetAxisRaw("Vertical1");
+
+        velocity.x = inputHorizontal * SPEED;
+
+
+
+        if (onGround && inputVertical > 0) // Jump button
         {
-            velocity = rb.velocity; // don't remove
-
-            onGround = Physics2D.OverlapBox(groundCheckPos.position, new Vector2(.25f, .01f), 0, groundLayerMask) != null;
-
-            float inputHorizontal = Input.GetAxisRaw("Horizontal1");
-            float inputVertical = Input.GetAxisRaw("Vertical1");
-
-            velocity.x = inputHorizontal * SPEED;
-
-
-
-            if (onGround && inputVertical > 0) // Jump button
-            {
-                velocity.y = JUMPSTRENGTH;
-            }
-            else if (!onGround && velocity.y < -.3f && inputVertical > 0 && !isThereCeiling) // Glide
-            {
-                velocity.y = -0.3f;
-            }
-            else
-            {
-                velocity.y = rb.velocity.y;
-            }
-            animationHaldler(inputHorizontal, inputVertical);
-            rb.velocity = velocity;
+            velocity.y = JUMPSTRENGTH;
+        }
+        else if (!onGround && velocity.y < -.3f && inputVertical > 0 && !isThereCeiling) // Glide
+        {
+            velocity.y = -0.3f;
         }
         else
         {
-            rb.velocity = Vector2.zero;
+            velocity.y = rb.velocity.y;
         }
+        animationHaldler(inputHorizontal, inputVertical);
+        rb.velocity = velocity;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (levelHandler != null && !levelHandler.levelEnd)
+        if (collision.transform.CompareTag("Player"))
         {
-            if (collision.transform.CompareTag("Player"))
-            {
-                levelHandler.levelFinished();
-            }
-            if (collision.transform.CompareTag("Danger"))
-            {
-                levelHandler.levelFailed();
-            }
+            levelHandler.levelFinished();
+        }
+        if (collision.transform.CompareTag("Danger"))
+        {
+            levelHandler.levelFailed();
+        }
+        if (collision.transform.CompareTag("Spaniard"))
+        {
+            levelHandler.levelFailed();
         }
     }
     void OnDrawGizmos()

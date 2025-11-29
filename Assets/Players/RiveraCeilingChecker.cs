@@ -15,8 +15,16 @@ public class RiveraCeilingChecker : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        ceilingTransforms.Add(collision.transform);
-        rivera.isThereCeiling = true;
+        if (collision.CompareTag("Danger"))
+        {
+            rivera.levelHandler.levelFailed();
+        }
+        else
+        {
+            ceilingTransforms.Add(collision.transform);
+            rivera.isThereCeiling = true;
+        }
+        
     }
 
     private void OnTriggerExit2D(Collider2D collision)

@@ -6,6 +6,7 @@ public class Button : MonoBehaviour
 {
     bool activated = false;
 
+    public Transform buttonHead;
     public Transform platform; 
     public Transform endPositionPlatform;
     public float Speed = 1.0f;
@@ -26,7 +27,7 @@ public class Button : MonoBehaviour
         if (activated)
         {
             platform.transform.position = Vector2.MoveTowards(platform.position, EndPos, Speed * Time.deltaTime);
-
+            
         }
         else
         {
@@ -37,6 +38,7 @@ public class Button : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         activated = true;
+        buttonHead.localPosition = new Vector3(0, 0.05f, 0);
         insideCollider.Add(collision.transform);
     }
 
@@ -48,7 +50,20 @@ public class Button : MonoBehaviour
             if(insideCollider.Count <= 0)
             {
                 activated = false;
+                buttonHead.localPosition = new Vector3(0, 0.1f, 0);
             }
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (endPositionPlatform != null)
+        {
+            Gizmos.DrawLine(platform.position, endPositionPlatform.position);
+        }
+        else
+        {
+            Gizmos.DrawLine(startPos, EndPos);
         }
     }
 

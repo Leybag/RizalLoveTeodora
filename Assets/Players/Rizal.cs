@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 public class Rizal : MonoBehaviour
 {
-    LevelHandler levelHandler;
+    [NonSerialized] public LevelHandler levelHandler;
 
     [SerializeField] float SPEED = 3f;
     [SerializeField] float CLIMBSPEED = 3f;
@@ -46,87 +46,73 @@ public class Rizal : MonoBehaviour
 
     void movement()
     {
-        if (levelHandler != null && !levelHandler.levelEnd)
-        {
-            velocity = rb.velocity; // don't remove
+        velocity = rb.velocity; // don't remove
 
-            onGround = Physics2D.OverlapBox(transform.position, new Vector2(.25f, .01f), 0, groundLayerMask) != null;
-            onLadder = (ladderCol = Physics2D.OverlapBox(transform.position + (Vector3.up * .5f), new Vector2(.25f, .01f), 0, ladderLayerMask)) != null;
+        onGround = Physics2D.OverlapBox(transform.position, new Vector2(.25f, .01f), 0, groundLayerMask) != null;
+        onLadder = (ladderCol = Physics2D.OverlapBox(transform.position + (Vector3.up * .5f), new Vector2(.25f, .01f), 0, ladderLayerMask)) != null;
 
         
-            float inputHorizontal = Input.GetAxisRaw("Horizontal");
-            float inputVertical = Input.GetAxisRaw("Vertical");
+        float inputHorizontal = Input.GetAxisRaw("Horizontal");
+        float inputVertical = Input.GetAxisRaw("Vertical");
 
-            velocity.x = inputHorizontal * SPEED;
+        velocity.x = inputHorizontal * SPEED;
 
-            if (onGround && inputVertical > 0) // Jump button
-            {
-                velocity.y = JUMPSTRENGTH;
-                //jump
-            }
-            else if (!onGround && onLadder) // Climb buttons
-            {
-                //climb
-                velocity = Vector2.zero;
-                float newXpos = transform.position.x;
+        if (onGround && inputVertical > 0) // Jump button
+        {
+            velocity.y = JUMPSTRENGTH;
+            //jump
+        }
+        else if (!onGround && onLadder) // Climb buttons
+        {
+            //climb
+            velocity = Vector2.zero;
+            float newXpos = transform.position.x;
 
-                if(inputHorizontal == 0 && inputVertical != 0)
-                {
-                    newXpos = Mathf.Lerp(transform.position.x, ladderCol.bounds.center.x, .1f);
-                }
-                else if (inputHorizontal != 0)
-                {
-                    newXpos = transform.position.x + (inputHorizontal * SPEED) * Time.deltaTime;
-                }
-                transform.position = new Vector3(newXpos, transform.position.y + (inputVertical * CLIMBSPEED) * Time.deltaTime, 0);
-            }
-            else
+            if(inputHorizontal == 0 && inputVertical != 0)
             {
-                velocity.y = rb.velocity.y;
+                newXpos = Mathf.Lerp(transform.position.x, ladderCol.bounds.center.x, .1f);
             }
-            if (onLadder)
+            else if (inputHorizontal != 0)
             {
-                rb.gravityScale = 0;
+                newXpos = transform.position.x + (inputHorizontal * SPEED) * Time.deltaTime;
             }
-            else
-            {
-                rb.gravityScale = 2;
-            }
-            
-            animationHandler(inputHorizontal);
-
-            rb.velocity = velocity;
+            transform.position = new Vector3(newXpos, transform.position.y + (inputVertical * CLIMBSPEED) * Time.deltaTime, 0);
         }
         else
         {
-            rb.velocity = Vector2.zero;
+            velocity.y = rb.velocity.y;
         }
+        if (onLadder)
+        {
+            rb.gravityScale = 0;
+        }
+        else
+        {
+            rb.gravityScale = 2;
+        }
+            
+        animationHandler(inputHorizontal, inputVertical);
+
+        rb.velocity = velocity;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (levelHandler != null && !levelHandler.levelEnd)
+        if (collision.transform.CompareTag("Player"))
         {
-            if (collision.transform.CompareTag("Player"))
-            {
-                levelHandler.levelFinished();
-            }
-            if (collision.transform.CompareTag("Danger"))
-            {
-                levelHandler.levelFailed();
-            }
-            if (collision.transform.CompareTag("Spaniard"))
-            {
-                levelHandler.levelFailed();
-            }
-            if (collision.transform.CompareTag("Friar"))
-            {
-                levelHandler.levelFailed();
-            }
+            levelHandler.levelFinished();
         }
-        if (collision.gameObject.CompareTag("Platform"))
+        if (collision.transform.CompareTag("Danger"))
         {
-
+            levelHandler.levelFailed();
+        }
+        if (collision.transform.CompareTag("Spaniard"))
+        {
+            levelHandler.levelFailed();
+        }
+        if (collision.transform.CompareTag("Friar"))
+        {
+            levelHandler.levelFailed();
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
@@ -153,7 +139,7 @@ public class Rizal : MonoBehaviour
         Gizmos.DrawWireCube(Vector3.up * .5f, new Vector2(.25f, .01f));
     }
 
-    void animationHandler(float horizontalInput)
+    void animationHandler(float horizontalInput , float verticalInput)
     {
         if (horizontalInput > 0)
         {
@@ -164,26 +150,33 @@ public class Rizal : MonoBehaviour
             sprite.flipX = true;
         }
 
-
-        if (horizontalInput == 0 && onGround && !onLadder)
+        if (!onLadder)
         {
-            anim.Play("Idle");
+            if (horizontalInput == 0 && onGround)
+            {
+                anim.Play("Idle");
+            }
+            else if (horizontalInput != 0 && onGround)
+            {
+                anim.Play("Walk");
+            }
+            else if (!onGround)
+            {
+                anim.Play("Jump");
+            }
         }
-        else if(horizontalInput != 0 && onGround && !onLadder)
+        else
         {
-            anim.Play("Walk");
-        }
-        else if (!onLadder && !onGround)
-        {
-            anim.Play("Jump");
-        }
-        else if (onLadder && !onGround && horizontalInput == 0)
-        {
-            anim.Play("Climb_Idle");
-        }
-        else if (onLadder && !onGround && horizontalInput != 0)
-        {
-            anim.Play("Climb");
+            if (verticalInput != 0 || horizontalInput != 0)
+            {
+                anim.Play("Climb");
+            }
+            else if (horizontalInput == 0 || verticalInput == 0)
+            {
+                anim.Play("Climb_Idle");
+            }
+            
+            print(horizontalInput + " " + verticalInput);
         }
     }
 

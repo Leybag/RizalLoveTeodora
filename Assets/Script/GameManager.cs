@@ -25,6 +25,11 @@ public static class GameManager
         false,
     };
 
+    public static int CheckLevelHeartCollected(int level)
+    {
+        return levelProgress[level];
+    }
+
     public static void setLevelCollectedHearts(int  level, int collectedHearts)
     {
         if (levelProgress[level] < collectedHearts)
@@ -43,5 +48,13 @@ public static class GameManager
     public static bool CheckLevelUnlock(int level)
     {
         return levelUnlock[level - 1];
+    }
+
+    public static void printAllUnlockLevels()
+    {
+        for (int i = 1; i < levelUnlock.Count; i++) 
+        {
+            Debug.Log("Level " + i + ": " + levelUnlock[i-1]);
+        }
     }
 }

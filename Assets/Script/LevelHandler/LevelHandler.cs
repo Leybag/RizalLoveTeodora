@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -19,7 +20,7 @@ public class LevelHandler : MonoBehaviour
     [SerializeField] GameObject FailedPanel;
     [SerializeField] GameObject MenuPanel;
 
-    int heartCollected = 0;
+    [NonSerialized] public int heartCollected = 0;
     public bool levelEnd = false;
 
     private void Update()

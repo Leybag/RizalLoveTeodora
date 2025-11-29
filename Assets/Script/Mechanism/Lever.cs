@@ -7,7 +7,10 @@ public class Lever : MonoBehaviour
 {
     bool activated = false;
 
-    public Transform LeverTransform;
+    SpriteRenderer LeverSpriteRenderer;
+    public Sprite LeverActivatedSprite;
+    public Sprite LeverDeactivatedSprite;
+
     public Transform platform; 
     public Transform endPositionPlatform;
     public float Speed = 1.0f;
@@ -17,6 +20,8 @@ public class Lever : MonoBehaviour
 
     private void Start()
     {
+        LeverSpriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+
         startPos = platform.position;
         EndPos = endPositionPlatform.position;
         Destroy(endPositionPlatform.gameObject);
@@ -27,12 +32,12 @@ public class Lever : MonoBehaviour
         if (activated)
         {
             platform.transform.position = Vector2.MoveTowards(platform.position, EndPos, Speed * Time.deltaTime);
-            LeverTransform.rotation = Quaternion.RotateTowards(LeverTransform.rotation, Quaternion.Euler(0, 0, -60), 3f);
+            LeverSpriteRenderer.sprite = LeverActivatedSprite;
         }
         else
         {
             platform.transform.position = Vector2.MoveTowards(platform.position, startPos, Speed * Time.deltaTime);
-            LeverTransform.rotation = Quaternion.RotateTowards(LeverTransform.rotation, Quaternion.Euler(0, 0, 60), 3f);
+            LeverSpriteRenderer.sprite = LeverDeactivatedSprite;
         }
     }
 
@@ -40,5 +45,15 @@ public class Lever : MonoBehaviour
     {
         activated = !activated;
     }
-
+    private void OnDrawGizmos()
+    {
+        if (endPositionPlatform != null)
+        {
+            Gizmos.DrawLine(platform.position, endPositionPlatform.position);
+        }
+        else
+        {
+            Gizmos.DrawLine(startPos, EndPos);
+        }
+    }
 }

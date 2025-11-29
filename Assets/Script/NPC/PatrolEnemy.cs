@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -6,6 +7,7 @@ using UnityEngine;
 public class PatrolEnemy : MonoBehaviour
 {
     public float SPEED = 2f;
+    Animator anim;
 
     [SerializeField] Transform flipDirection;
     [SerializeField] Transform checkGroundPosition;
@@ -17,17 +19,19 @@ public class PatrolEnemy : MonoBehaviour
     [SerializeField] GameObject BulletPrefab = null;
     [SerializeField] float bulletShootInterval = 1f;
     [SerializeField] float bulletSpeed = 1f;
-    Coroutine shoot = null;
 
     Rigidbody2D rb;
 
     bool isThereGround = true;
     bool isThereWall = true;
+    bool isShooting = false;
+    float shootTimer = 0f;
     int direction = 1;
     Vector2 velocity = Vector2.zero;
 
     void Start()
     {
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -36,26 +40,42 @@ public class PatrolEnemy : MonoBehaviour
     {
         velocity = rb.velocity;
 
-        checkIfChangeDirection();
-
-        velocity.x = SPEED * direction;
-
-        rb.velocity = velocity;
-
-        if (BulletPrefab != null && shoot == null)
+        if (!isShooting)
         {
-            shoot = StartCoroutine(shootBullet());
+            checkIfChangeDirection();
+
+            velocity.x = SPEED * direction;
+
+            if(BulletPrefab != null)
+            {
+                shootTimer += Time.deltaTime;
+                if (shootTimer >= bulletShootInterval)
+                {
+                    isShooting = true;
+                    anim.Play("Shoot");
+                }
+                else
+                {
+                    anim.Play("Walk");
+                }
+            }
+        }
+        else
+        {
+            velocity.x = 0;
         }
 
+        rb.velocity = velocity;
     }
 
-    IEnumerator shootBullet()
+    public void Shoot()
     {
-        ShootBullet b = Instantiate(BulletPrefab, bulletSpawnPosition.position,Quaternion.identity).GetComponent<ShootBullet>();
+        isShooting = false;
+        shootTimer = 0f;
+        ShootBullet b = Instantiate(BulletPrefab, bulletSpawnPosition.position, Quaternion.identity).GetComponent<ShootBullet>();
         b.bulletSpeed = (bulletSpeed + SPEED) * direction;
-        yield return new WaitForSeconds(bulletShootInterval);
-        shoot = null;
     }
+
     void changeDirection()
     {
         direction *= -1;

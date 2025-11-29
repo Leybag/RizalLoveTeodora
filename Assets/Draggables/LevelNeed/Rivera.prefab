@@ -26,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 1205558740734551097}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5027, z: 0}
-  m_LocalScale: {x: 0.0560375, y: 0.0560375, z: 0.1307454}
+  m_LocalPosition: {x: 0, y: 0.6288, z: 0}
+  m_LocalScale: {x: 0.069917984, y: 0.069917984, z: 0.16313103}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 574605821340453928}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 4425620269669405383}
   - component: {fileID: 1536871926223126272}
   - component: {fileID: 8620456246087008049}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: CeilingChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,10 +129,10 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 3221225864
+    m_Bits: 3221225736
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 268435456
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -149,7 +149,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.7587209}
+  m_Offset: {x: 0, y: 0.8952704}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -160,7 +160,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.45644528, y: 0.4855132}
+  m_Size: {x: 0.52168435, y: 0.66408837}
   m_EdgeRadius: 0
 --- !u!114 &8620456246087008049
 MonoBehaviour:
@@ -322,8 +322,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.25}
-  m_Size: {x: 0.5, y: 0.5}
+  m_Offset: {x: 0, y: 0.28128743}
+  m_Size: {x: 0.56257486, y: 0.56257486}
   m_Direction: 0
 --- !u!95 &4711434980119497324
 Animator:
