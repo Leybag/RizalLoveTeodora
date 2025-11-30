@@ -59,8 +59,15 @@ public class LevelHandler : MonoBehaviour
             //Change this later
             VictoryPanel.SetActive(true);
         }
+
+        else
+        {
+            VictoryPanel.SetActive(true);
+            Time.timeScale = 0f;
+        }
         
     }
+
 
     public void levelFailed()
     {

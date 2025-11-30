@@ -166,7 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SPEED: 3
   CLIMBSPEED: 2
-  JUMPSTRENGTH: 6
+  JUMPSTRENGTH: 7
   velocity: {x: 0, y: 0}
   groundLayerMask:
     serializedVersion: 2

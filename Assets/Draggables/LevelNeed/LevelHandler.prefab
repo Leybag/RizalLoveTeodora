@@ -947,7 +947,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 43.45
+  m_fontSize: 43.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3914,7 +3914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95deafbbb78f65244943d1da3d20f02c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 1
+  level: 2
   Panelheart1: {fileID: 7382284553114067679}
   Panelheart2: {fileID: 7481453974800252970}
   Panelheart3: {fileID: 5083439977191580638}
@@ -4519,7 +4519,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 6.550049, y: -87.599976}
+  m_AnchoredPosition: {x: 99, y: -87.599976}
   m_SizeDelta: {x: -132.88852, y: -235.4747}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8009815889498134938
