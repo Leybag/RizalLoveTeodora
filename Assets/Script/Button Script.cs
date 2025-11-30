@@ -23,4 +23,10 @@ public class ButtonScript : MonoBehaviour
     {
         SceneManager.LoadScene("Main Menu");
     }
+
+    public void Exit()
+    {
+        Application.Quit();
+    }
+
 }
