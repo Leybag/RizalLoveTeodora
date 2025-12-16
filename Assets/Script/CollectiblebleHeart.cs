@@ -1,9 +1,10 @@
+using PurrNet;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CollectibleHeart : MonoBehaviour
+public class CollectibleHeart : NetworkBehaviour
 {
     LevelHandler levelHandler;
 
@@ -23,7 +24,7 @@ public class CollectibleHeart : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
-            levelHandler.addHeart();
+            levelHandler.addHeart(gameObject);
             Destroy(gameObject);
         }
     }

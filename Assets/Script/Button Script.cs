@@ -16,7 +16,7 @@ public class ButtonScript : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene("Levels Menu");
+        SceneManager.LoadScene("LobbySample");
     }
 
     public void MainMenu()

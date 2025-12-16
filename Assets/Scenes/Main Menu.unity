@@ -5124,8 +5124,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rizal
       objectReference: {fileID: 0}
+    - target: {fileID: 6918220921724243178, guid: a696d8adbd8f1f448a0c3bbe3d01c4b3, type: 3}
+      propertyPath: _components.Array.data[0].target
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1191717529959666860, guid: a696d8adbd8f1f448a0c3bbe3d01c4b3, type: 3}
+    - {fileID: 6918220921724243178, guid: a696d8adbd8f1f448a0c3bbe3d01c4b3, type: 3}
+    - {fileID: -245589343665465194, guid: a696d8adbd8f1f448a0c3bbe3d01c4b3, type: 3}
+    - {fileID: -1874729942945532123, guid: a696d8adbd8f1f448a0c3bbe3d01c4b3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

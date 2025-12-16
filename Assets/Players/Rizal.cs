@@ -1,3 +1,4 @@
+using PurrNet;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using UnityEngine.UIElements;
 
 public class Rizal : MonoBehaviour
 {
-    [NonSerialized] public LevelHandler levelHandler;
+    public LevelHandler levelHandler;
 
     [SerializeField] float SPEED = 3f;
     [SerializeField] float CLIMBSPEED = 3f;
@@ -21,13 +22,14 @@ public class Rizal : MonoBehaviour
     [SerializeField] LayerMask ladderLayerMask;
     bool onLadder = false;
     Collider2D ladderCol;
-    Animator anim;
+    NetworkAnimator anim;
+    
     [SerializeField] SpriteRenderer sprite;
 
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        anim = GetComponent<NetworkAnimator>();
         GameObject[] rootObj = SceneManager.GetActiveScene().GetRootGameObjects();
         foreach (GameObject obj in rootObj)
         {
@@ -96,6 +98,8 @@ public class Rizal : MonoBehaviour
         rb.velocity = velocity;
     }
 
+
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.transform.CompareTag("Player"))
@@ -115,6 +119,8 @@ public class Rizal : MonoBehaviour
             levelHandler.levelFailed();
         }
     }
+
+
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Platform"))

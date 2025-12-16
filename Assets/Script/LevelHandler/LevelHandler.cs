@@ -1,8 +1,9 @@
+using PurrNet;
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelHandler : MonoBehaviour
+public class LevelHandler : NetworkBehaviour
 {
     //level cant be zero
     [SerializeField] int level = 1;
@@ -26,7 +27,9 @@ public class LevelHandler : MonoBehaviour
             Menubtn();
         }
     }
-    public void addHeart()
+
+    [ObserversRpc]
+    public void addHeart(GameObject heart)
     {
         heartCollected++;
         switch (heartCollected)
@@ -41,8 +44,10 @@ public class LevelHandler : MonoBehaviour
                 Panelheart3.Play("Pop");
                 break;
         }
+        Destroy(heart);
     }
 
+    [ObserversRpc]
     public void levelFinished()
     {
         if (!levelEnd)
@@ -64,7 +69,7 @@ public class LevelHandler : MonoBehaviour
         
     }
 
-
+    [ObserversRpc]
     public void levelFailed()
     {
         if (!levelEnd)
@@ -78,29 +83,36 @@ public class LevelHandler : MonoBehaviour
         }
     }
 
+    [ObserversRpc]
     public void RetryLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1f;
     }
+
+    [ObserversRpc]
     public void MainMenu()
     {
         SceneManager.LoadScene("Main Menu");
         Time.timeScale = 1f;
     }
 
+
+    [ObserversRpc]
     public void NextLevel()
     {
         SceneManager.LoadScene("Level " + (level +1));
         Time.timeScale = 1f;
     }
 
+    [ObserversRpc]
     public void Menubtn()
     {
         MenuPanel.SetActive(true);
         Time.timeScale = 0f;
     }
 
+    [ObserversRpc]
     public void Resumebtn()
     {
         MenuPanel.SetActive(false);
