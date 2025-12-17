@@ -1,4 +1,5 @@
 using PurrNet;
+using PurrNet.Modules;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-public class Rizal : MonoBehaviour
+public class Rizal : NetworkBehaviour
 {
     public LevelHandler levelHandler;
 
@@ -26,8 +27,9 @@ public class Rizal : MonoBehaviour
     
     [SerializeField] SpriteRenderer sprite;
 
-    private void Awake()
+    protected override void OnSpawned()
     {
+        base.OnSpawned();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<NetworkAnimator>();
         GameObject[] rootObj = SceneManager.GetActiveScene().GetRootGameObjects();
@@ -38,12 +40,16 @@ public class Rizal : MonoBehaviour
                 obj.TryGetComponent<LevelHandler>(out levelHandler);
             }
         }
-
+        
     }
 
     private void Update()
     {
-        movement();
+        GiveOwnership(NetworkManager.main.players[0]);
+        if (isOwner)
+        {
+            movement();
+        }
     }
 
     void movement()

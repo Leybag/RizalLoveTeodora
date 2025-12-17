@@ -86,14 +86,14 @@ public class LevelHandler : NetworkBehaviour
     [ObserversRpc]
     public void RetryLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        NetworkManager.main.sceneModule.LoadSceneAsync("Level " + (level));
         Time.timeScale = 1f;
     }
 
     [ObserversRpc]
     public void MainMenu()
     {
-        SceneManager.LoadScene("Main Menu");
+        NetworkManager.main.sceneModule.LoadSceneAsync("Main Menu");
         Time.timeScale = 1f;
     }
 
@@ -101,7 +101,7 @@ public class LevelHandler : NetworkBehaviour
     [ObserversRpc]
     public void NextLevel()
     {
-        SceneManager.LoadScene("Level " + (level +1));
+        NetworkManager.main.sceneModule.LoadSceneAsync("Level " + (level + 1));
         Time.timeScale = 1f;
     }
 

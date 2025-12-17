@@ -7,7 +7,7 @@ using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Rivera : MonoBehaviour
+public class Rivera : NetworkBehaviour
 {
     [NonSerialized] public LevelHandler levelHandler;
 
@@ -20,14 +20,14 @@ public class Rivera : MonoBehaviour
     [SerializeField] Transform groundCheckPos;
     [SerializeField] LayerMask groundLayerMask;
     [SerializeField] SpriteRenderer sprite;
-    Animator anim;
+    NetworkAnimator anim;
     bool onGround = false;
     [NonSerialized] public bool isThereCeiling = false;
 
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        anim = GetComponent<NetworkAnimator>();
         GameObject[] rootObj = SceneManager.GetActiveScene().GetRootGameObjects();
         foreach (GameObject obj in rootObj)
         {
@@ -37,11 +37,20 @@ public class Rivera : MonoBehaviour
             }
         }
 
+        
     }
 
     private void Update()
     {
-        movement();
+        if(NetworkManager.main.players.Count > 1)
+        {
+            GiveOwnership(NetworkManager.main.players[1]);
+        }
+        if (isOwner)
+        {
+            movement();
+        }
+        
     }
 
     void movement()

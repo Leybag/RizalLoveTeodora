@@ -1,8 +1,9 @@
+using PurrNet;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Button : MonoBehaviour
+public class Button : NetworkBehaviour
 {
     bool activated = false;
 
@@ -21,7 +22,6 @@ public class Button : MonoBehaviour
         EndPos = endPositionPlatform.position;
         Destroy(endPositionPlatform.gameObject);
     }
-
     private void Update()
     {
         if (activated)

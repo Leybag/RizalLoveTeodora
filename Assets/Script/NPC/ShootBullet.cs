@@ -1,6 +1,7 @@
+using PurrNet;
 using UnityEngine;
 
-public class ShootBullet : MonoBehaviour
+public class ShootBullet : NetworkBehaviour
 {
     Rigidbody2D rb;
     public float bulletSpeed = 1f;

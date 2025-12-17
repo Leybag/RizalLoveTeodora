@@ -1,8 +1,9 @@
+using PurrNet;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CountingHeart : MonoBehaviour
+public class CountingHeart : NetworkBehaviour
 {
 
     [SerializeField] LevelHandler levelHandler;

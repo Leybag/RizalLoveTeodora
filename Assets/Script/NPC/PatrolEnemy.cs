@@ -1,10 +1,11 @@
+using PurrNet;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PatrolEnemy : MonoBehaviour
+public class PatrolEnemy : NetworkBehaviour
 {
     public float SPEED = 2f;
     Animator anim;

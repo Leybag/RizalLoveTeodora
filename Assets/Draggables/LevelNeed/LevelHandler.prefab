@@ -3914,7 +3914,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95deafbbb78f65244943d1da3d20f02c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 2
+  _isSetup: 0
+  _prefabId: -2147483648
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
+  level: 1
   Panelheart1: {fileID: 7382284553114067679}
   Panelheart2: {fileID: 7481453974800252970}
   Panelheart3: {fileID: 5083439977191580638}
@@ -4915,7 +4924,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 43.45
+  m_fontSize: 44.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

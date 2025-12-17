@@ -1,3 +1,4 @@
+using PurrNet;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,12 +17,12 @@ public class ButtonScript : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene("LobbySample");
+        NetworkManager.main.sceneModule.LoadSceneAsync("Levels Menu");
     }
 
     public void MainMenu()
     {
-        SceneManager.LoadScene("Main Menu");
+        NetworkManager.main.sceneModule.LoadSceneAsync("Main Menu");
     }
 
     public void Exit()
@@ -29,4 +30,15 @@ public class ButtonScript : MonoBehaviour
         Application.Quit();
     }
 
+    public void Set_CreatePort()
+    {
+        NetworkManager.main.StartHost();
+        NetworkManager.main.sceneModule.LoadSceneAsync("Levels Menu");
+    }
+
+    public void Set_JoinPort()
+    {
+        NetworkManager.main.StartClient();
+        NetworkManager.main.sceneModule.LoadSceneAsync("Levels Menu");
+    }
 }

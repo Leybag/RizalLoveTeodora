@@ -1,9 +1,10 @@
+using PurrNet;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class Lever : MonoBehaviour
+public class Lever : NetworkBehaviour
 {
     bool activated = false;
 
@@ -40,11 +41,11 @@ public class Lever : MonoBehaviour
             LeverSpriteRenderer.sprite = LeverDeactivatedSprite;
         }
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         activated = !activated;
     }
+
     private void OnDrawGizmos()
     {
         if (endPositionPlatform != null)
