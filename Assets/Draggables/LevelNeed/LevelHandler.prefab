@@ -111,6 +111,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87d68d4d63636ed41bec3a6255117eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isSetup: 0
+  _prefabId: -2147483648
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
   levelHandler: {fileID: 7607507766107101159}
   heartCountAssigned: 1
 --- !u!1 &512170316601564988
@@ -1407,6 +1416,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87d68d4d63636ed41bec3a6255117eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isSetup: 0
+  _prefabId: -2147483648
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
   levelHandler: {fileID: 7607507766107101159}
   heartCountAssigned: 3
 --- !u!1 &2420068064884186741
@@ -1892,6 +1910,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87d68d4d63636ed41bec3a6255117eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isSetup: 0
+  _prefabId: -2147483648
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
   levelHandler: {fileID: 7607507766107101159}
   heartCountAssigned: 2
 --- !u!1 &2801024061805921333
@@ -2337,6 +2364,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87d68d4d63636ed41bec3a6255117eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isSetup: 0
+  _prefabId: -2147483648
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
   levelHandler: {fileID: 7607507766107101159}
   heartCountAssigned: 1
 --- !u!1 &4390920397867929536
@@ -3093,6 +3129,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87d68d4d63636ed41bec3a6255117eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isSetup: 0
+  _prefabId: -2147483648
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
   levelHandler: {fileID: 7607507766107101159}
   heartCountAssigned: 3
 --- !u!1 &5998230156375939943
@@ -4296,6 +4341,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87d68d4d63636ed41bec3a6255117eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isSetup: 0
+  _prefabId: -2147483648
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
   levelHandler: {fileID: 7607507766107101159}
   heartCountAssigned: 2
 --- !u!1 &7672038387265958845
@@ -4924,7 +4978,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 44.55
+  m_fontSize: 43.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
